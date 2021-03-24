@@ -1,0 +1,21 @@
+#Importanto as bibliotecas
+from plotly.offline import plot, iplot, init_notebook_mode
+init_notebook_mode(connected=True)
+import plotly.io as pio
+pio.renderers
+pio.renderers.default = 'colab'
+
+recuperados = '#21bf73'
+mortes = '#ff2e63'
+ativos = '#fe9801'
+
+casos_confirmados = px.choropleth(df_agrupados,locations='País',
+                    locationmode='country names',
+                    color=np.log(df_agrupados['Confirmado']),
+                    hover_name='País',
+                    hover_data=['Confirmado','Mortos'],
+                    animation_frame=df_agrupados['Data'].dt.strftime('%m-%y'),
+                   title='Avanço da doença no número de contaminados no mundo em 1 ano',
+                    color_continuous_scale=px.colors.sequential.Oranges)
+casos_confirmados.update_layout(autosize=False, width=1200, height=900)
+fcasos_confirmados.show()
